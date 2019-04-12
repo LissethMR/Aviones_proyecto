@@ -8,7 +8,9 @@ package com.mycompany.aviones;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import java.util.Scanner;
 /**
  *
  * @author lizeth
@@ -16,7 +18,7 @@ import java.util.logging.Logger;
 public class Principal {
     
     public HashMap<Integer, Avion> datos;
-    
+    String red="\033[31m";
     
     public void Principal(){
         
@@ -63,23 +65,23 @@ public class Principal {
         Avion av1 = new Avion(46, "A1"); Avion av2 = new Avion(47, "A2"); Avion av3 = new Avion(48, "A3");
         Avion bv1 = new Avion(49, "B1"); Avion bv2 = new Avion(50, "B2"); Avion bv3 = new Avion(51, "B3");
         Avion cv1 = new Avion(52, "C1"); Avion cv2 = new Avion(53, "C2"); Avion cv3 = new Avion(54, "C3");
-        Avion dv1 = new Avion(56, "D1"); Avion dv2 = new Avion(57, "D2"); Avion dv3 = new Avion(58, "D3");
-        Avion ev1 = new Avion(59, "E1"); Avion ev2 = new Avion(60, "E2"); Avion ev3 = new Avion(61, "E3");
+        Avion dv1 = new Avion(55, "D1"); Avion dv2 = new Avion(56, "D2"); Avion dv3 = new Avion(57, "D3");
+        Avion ev1 = new Avion(58, "E1"); Avion ev2 = new Avion(59, "E2"); Avion ev3 = new Avion(60, "E3");
         
         datos.get(2).getDatos().put(46, av1); datos.get(2).getDatos().put(47, av2); datos.get(2).getDatos().put(48, av3);
         datos.get(2).getDatos().put(49, bv1); datos.get(2).getDatos().put(50, bv2); datos.get(2).getDatos().put(51, bv3);
         datos.get(2).getDatos().put(52, cv1); datos.get(2).getDatos().put(53, cv2); datos.get(2).getDatos().put(54, cv3);
-        datos.get(2).getDatos().put(56, dv1); datos.get(2).getDatos().put(57, dv2); datos.get(2).getDatos().put(58, dv3);
-        datos.get(2).getDatos().put(59, ev1); datos.get(2).getDatos().put(60, ev2); datos.get(2).getDatos().put(61, ev3);
+        datos.get(2).getDatos().put(55, dv1); datos.get(2).getDatos().put(56, dv2); datos.get(2).getDatos().put(57, dv3);
+        datos.get(2).getDatos().put(58, ev1); datos.get(2).getDatos().put(59, ev2); datos.get(2).getDatos().put(60, ev3);
         
         // Avion 3
-        Avion avi1 = new Avion(62, "A1"); Avion avi2 = new Avion(63, "A2");
-        Avion bvi1 = new Avion(64, "B1"); Avion bvi2 = new Avion(65, "B2");
-        Avion cvi1 = new Avion(66, "C1"); Avion cvi2 = new Avion(67, "C2");
+        Avion avi1 = new Avion(61, "A1"); Avion avi2 = new Avion(62, "A2");
+        Avion bvi1 = new Avion(63, "B1"); Avion bvi2 = new Avion(64, "B2");
+        Avion cvi1 = new Avion(65, "C1"); Avion cvi2 = new Avion(66, "C2");
         
-        datos.get(3).getDatos().put(62, avi1); datos.get(3).getDatos().put(63, avi2);
-        datos.get(3).getDatos().put(64, bvi1); datos.get(3).getDatos().put(65, bvi2);
-        datos.get(3).getDatos().put(66, cvi1); datos.get(3).getDatos().put(67, cvi2);
+        datos.get(3).getDatos().put(61, avi1); datos.get(3).getDatos().put(62, avi2);
+        datos.get(3).getDatos().put(63, bvi1); datos.get(3).getDatos().put(64, bvi2);
+        datos.get(3).getDatos().put(65, cvi1); datos.get(3).getDatos().put(66, cvi2);
         
     }
     // Imprime todo el mapa de aviones completo
@@ -93,12 +95,28 @@ public class Principal {
             }
         }
     }
-    // Buscar un dato en el mapa avion    
-    public void buscarPuesto() throws Exception {
-        try {
-            Avion pPadre = datos.get(2); // KeyPadre 1, 2 y 3 
-            Avion pHijo = pPadre.getDatos().get(52); // KeyHijo 4 al 67
-            System.out.println(pPadre.getNombre()+"\nPuesto: "+pHijo.getNombre());
+    // Comprar un puesto en el mapa avion    
+    public void comprar(){
+        int key_avion;
+        int puesto;
+        
+        try{
+            Scanner buscar_avion = new Scanner(System.in);
+            Scanner buscar_puesto = new Scanner(System.in);
+            System.out.print("Avion 1, 2 o 3: ");
+            key_avion = buscar_avion.nextInt(); //Key avion 1, 2 o 3
+            Avion pPadre = datos.get(key_avion);
+            if(key_avion == 1){
+                System.out.print("Puesto del 4 al 45: ");
+            } else if(key_avion == 2){
+                System.out.print("Puesto del 46 al 60: ");
+            } else{
+                System.out.print("Puesto del 61 al 66: ");
+            }
+            puesto = buscar_puesto.nextInt();
+            Avion pHijo = pPadre.getDatos().get(puesto);
+            System.out.println("\n"+red+"COMPRADO\n"+pPadre.getNombre()+"\nPuesto: "+pHijo.getNombre());
+            
         } catch(Exception e){
             System.out.println("Ocurrio un error. Dato no existente");
             System.out.println("   " + e.getMessage());

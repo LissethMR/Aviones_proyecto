@@ -5,6 +5,8 @@
  */
 package com.mycompany.aviones;
 
+import java.util.Scanner;
+
 /**
  *
  * @author lizeth
@@ -15,7 +17,23 @@ public class Main {
         
         Principal p = new Principal();
         p.Principal();
-        //p.mostrarMapaAvion();   
-        p.buscarPuesto();
+        int elegir;
+        
+        do{
+            System.out.println("\n1. Disponibilidad de puestos"+"\n2. Comprar"+"\n3. Salir\n");
+            System.out.print("Opcion: ");
+            Scanner opcion = new Scanner(System.in);
+            elegir = opcion.nextInt();
+
+            switch(elegir){
+                case 1: p.mostrarMapaAvion(); 
+                    break;
+                case 2: p.comprar();
+                    break;
+                case 3:
+                    System.out.println("Fin de la compra");
+                    break;
+            } 
+        } while(elegir !=3); 
     }
 }
